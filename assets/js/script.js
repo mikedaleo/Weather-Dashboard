@@ -33,8 +33,8 @@ function convertCityNameToCoords(city) {
             console.log(lat);
             console.log(lon);
             // 5 day forecast API
-            let cityURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APIkey}`
-            // get weather forecat of cityURL;
+            let cityURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${APIkey}`
+            // get weather forecast of cityURL;
             getWeatherData(cityURL);
         })
         .catch(function (error) {
@@ -42,14 +42,24 @@ function convertCityNameToCoords(city) {
         })
 };
 
+// 
 function getWeatherData(cityURL) {
     console.log(cityURL);
+
     fetch(cityURL)
         .then(function (response) {
             if (!response.ok) {
                 throw response.json();
             }
             return response.json();
+        })
+        .then(function (cityForecast) {
+            console.log(cityForecast);
+            console.log(cityForecast.city.name);
+            console.log(cityForecast.list[0])
+            console.log(`Temp: ${cityForecast.list[0].main.temp}`);
+            console.log(`Wind: ${cityForecast.list[0].wind.speed}`);
+            console.log(`Humidity: ${cityForecast.list[0].main.humidity}%`);
         })
 
 }
