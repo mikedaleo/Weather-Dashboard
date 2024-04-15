@@ -5,7 +5,7 @@ const forecast = document.querySelector('#forecast');
 const searchFormEl = document.querySelector('#searchForm');
 const cityInputEl = document.querySelector('#cityInput');
 const searchButton = document.querySelector('#searchButton')
-
+dayjs().format()
 
 
 
@@ -42,7 +42,7 @@ function convertCityNameToCoords(city) {
         })
 };
 
-// 
+// get weather data from the URL containing lat/lon
 function getWeatherData(cityURL) {
     console.log(cityURL);
 
@@ -60,9 +60,25 @@ function getWeatherData(cityURL) {
             console.log(`Temp: ${cityForecast.list[0].main.temp}`);
             console.log(`Wind: ${cityForecast.list[0].wind.speed}`);
             console.log(`Humidity: ${cityForecast.list[0].main.humidity}%`);
+            createWeatherCard(cityForecast);
         })
 
 }
+
+function createWeatherCard(cityForecast) {
+
+    for (let i = 0; i < 40; i += 8) {
+        const todayForecast = document.querySelector()
+        let dailyCityForecast = cityForecast.list[i];
+        let date = dayjs(dailyCityForecast.dt_txt).format('M/D/YYYY');
+        console.log(`Date: ${date}`);
+        console.log(`Temp: ${dailyCityForecast.main.temp}`);
+        console.log(`Wind: ${dailyCityForecast.wind.speed}`);
+        console.log(`Humidity: ${dailyCityForecast.main.humidity}%`);
+    }
+}
+
+
 
 // function searchForecast(city) {
 //     let cityURL = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=imperial&appid=${APIkey}`;
