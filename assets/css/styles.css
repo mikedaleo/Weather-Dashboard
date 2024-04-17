@@ -1,0 +1,52 @@
+* {
+    font-family: "Overpass", sans-serif;
+}
+
+header {
+    background-image: linear-gradient(to right, #4e51ff, #26008d);
+    color: white;
+    height: 60px;
+}
+
+header h1 {
+    position: absolute;
+    right: 350px;
+    top: 0;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+aside {
+    width: 300px;
+    height: 100%;
+}
+
+h3 {
+    margin: auto;
+}
+.today {
+    width: 1000px;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 0 0 0 10px;
+}
+
+.forecast {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    width: 1000px;
+    left: 300px;
+}
+
+.daily {
+    background-color: rgb(25, 25, 58);
+    color: white;
+    width: 200px;
+    padding: 5px 0 0 10px;
+    border-radius: 5px;
+
+}
