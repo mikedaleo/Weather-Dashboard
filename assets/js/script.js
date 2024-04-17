@@ -3,7 +3,7 @@ const searchHistory = document.querySelector('#searchHistory');
 const today = document.querySelector('#today');
 const forecast = document.querySelector('#forecast');
 const searchFormEl = document.querySelector('#searchForm');
-const cityInputEl = document.querySelector('#cityInput');
+let cityInputEl = document.querySelector('#cityInput');
 const searchButton = document.querySelector('#searchButton')
 dayjs().format()
 
@@ -65,16 +65,55 @@ function getWeatherData(cityURL) {
 
 }
 
+// create a card with the day's weather information for each day
 function createWeatherCard(cityForecast) {
+    const todayWeather = document.querySelector('#today');
+    const weeklyForecast = document.querySelector('#forecast');
+    const forecastHeader = document.createElement('h3');
+    forecastHeader.textContent = '5-Day Forecast:'
+    weeklyForecast.append(forecastHeader);
 
     for (let i = 0; i < 40; i += 8) {
-        const todayForecast = document.querySelector()
+        const card = document.createElement('div');
+        const cardDate = document.createElement('h3');
+        const cardTemp = document.createElement('p');
+        const cardWind = document.createElement('p');
+        const cardHumidity = document.createElement('p');
+        let cityName = cityForecast.city.name;
         let dailyCityForecast = cityForecast.list[i];
         let date = dayjs(dailyCityForecast.dt_txt).format('M/D/YYYY');
+        let temp = dailyCityForecast.main.temp;
+        let wind = dailyCityForecast.wind.speed;
+        let humidity = dailyCityForecast.main.humidity;
+        let weatherIconId = dailyCityForecast.weather[0].icon;
+        let weatherIconImg = document.createElement('img');
+        weatherIconImg.setAttribute('src', `https://openweathermap.org/img/wn/${weatherIconId}.png`);
+        cardDate.textContent = `${date}`;
+        cardTemp.textContent = `Temp: ${temp}`;
+        cardWind.textContent = `Wind: ${wind}`;
+        cardHumidity.textContent = `Humidity: ${humidity}%`;
+        card.append(cardDate, weatherIconImg, cardTemp, cardWind, cardHumidity);
+        // todayWeather.append(card);
+        if (i === 0) {
+            cardDate.textContent = `${cityName} (${date})`;
+            cardDate.append(weatherIconImg);
+            todayWeather.append(card);
+            card.setAttribute('class', 'today');
+            
+        } else {
+            card.setAttribute('class', 'daily');
+            console.log(`Date: ${date}`);
+            console.log(`Temp: ${temp}`);
+            console.log(`Wind: ${wind}`);
+            console.log(`Humidity: ${humidity}%`)
+            weeklyForecast.append(card);
+        }
+
         console.log(`Date: ${date}`);
         console.log(`Temp: ${dailyCityForecast.main.temp}`);
         console.log(`Wind: ${dailyCityForecast.wind.speed}`);
         console.log(`Humidity: ${dailyCityForecast.main.humidity}%`);
+        cityInputEl.value = '';
     }
 }
 
