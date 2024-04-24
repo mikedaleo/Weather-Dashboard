@@ -5,8 +5,6 @@ https://mikedaleo.github.io/Weather-Dashboard/
 
 A weather dashboard to see the weather forecast for the current day and upcoming 5 days.
 
-https://mikedaleo.github.io/Weather-Dashboard/
-
 ![Screenshot](./assets/images/mikedaleo.github.io_Weather-Dashboard_.png)
 
 ## Usage 
