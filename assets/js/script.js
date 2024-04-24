@@ -152,4 +152,4 @@ function handleFormSubmit(event) {
 searchFormEl.addEventListener('submit', handleFormSubmit);
 
 // load search history on page load
-window.onload(loadSearchHistory());
+window.onload = loadSearchHistory();
