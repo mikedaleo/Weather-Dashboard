@@ -46,7 +46,7 @@ function loadSearchHistory() {
 // covert the city name into lat/lon coordinates
 function convertCityNameToCoords(city) {
     // geocoding API - converting city name to coordinates
-    const coordURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
+    const coordURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${APIkey}`;
 
     fetch(coordURL)
         .then(function (response) {
