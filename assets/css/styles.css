@@ -1,48 +1,107 @@
 * {
     font-family: "Overpass", sans-serif;
+    box-sizing: border-box;
 }
 
 header {
     background-image: linear-gradient(to right, #4e51ff, #26008d);
     color: white;
-    height: 60px;
 }
 
 header h1 {
-    position: absolute;
-    right: 350px;
-    top: 0;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
 }
 
 main {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 }
 
 aside {
-    width: 300px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     height: 100%;
+}
+
+.search-label {
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.city-input {
+    width: 100%;
+    height: 40px;
+}
+
+.search-button {
+    font-weight: bold;
+    font-size: 15px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    background: #3b6fff;
+    margin: 10px 0 10px 0;
+    width: 100%;
+    height: 30px;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+}
+
+hr {
+    width: 100%;
+    margin: 10px 0 10px 0;
+}
+
+.search-history {
+    font-weight: bold;
+    font-size: 15px;
+    background: rgb(168, 168, 168);
+    border: 0;
+    border-radius: 5px;
+    margin: 5px 0 5px 0;
+    width: 100%;
+    height: 30px;
 }
 
 h3 {
     margin: auto;
 }
+
+.weather {
+    margin: 10px;
+}
+
 .today {
-    width: 1000px;
+    font-weight: bold;
     border: 2px solid black;
     border-radius: 5px;
     padding: 0 0 0 10px;
 }
 
+.today h3 {
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.five-day {
+    margin: 10px;
+}
+
 .forecast {
     display: flex;
-    justify-content: space-between;
-    position: relative;
-    width: 1000px;
-    left: 300px;
+    flex-wrap: wrap;
+   
 }
 
 .daily {
+    margin: 0 10px 10px 0;
     background-color: rgb(25, 25, 58);
     color: white;
     width: 200px;

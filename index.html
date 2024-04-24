@@ -17,30 +17,37 @@
         <h1>Weather Dashboard</h1>
     </header>
     <main>
-        <aside class="search">
-            <div id="aside">
-                <h2>Search for a City:</h2>
-                <form>
-                    <input type="text" placeholder="Philadelphia" id="cityInput">
-                    <br>
-                    <button type="button" id="searchButton">Search</button>
-                </form>
-                <hr>
+        <aside class="search" id="search-aside">
+            <form type="submit" id="search-form">
+                <label for="city-input" class="search-label">Search for a City:</label>
+                <br>
+                <input type="text" class="city-input" placeholder="Philadelphia" id="city-input">
+                <br>
+                <button type="submit" class="search-button" id="search-button">Search</button>
+            </form>
+            <hr>
+            <div id="search-history">
+            <button class="search-history">Test</button>
+            <button class="search-history">Test</button>
+            <button class="search-history">Test</button>
+            <button class="search-history">Test</button>
+            <button class="search-history">Test</button>
             </div>
 
-            <div id="searchHistory">
-
-            </div>
         </aside>
 
-        <div id="today">
+        <div id="weather" class="weather">
+            <div id="today">
 
-        </div>
-        <br>
+            </div>
+            <h3 id="five-day" class="five-day"></h3>
+            <div id="forecast" class="forecast">
 
-        <div class="forecast" id="forecast">
+            </div>
             
         </div>
+
+
     </main>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 
