@@ -23,29 +23,25 @@ function saveSearchHistory(cityToSave) {
         storedSearches.splice(0, storedSearches.length - 10)
     }
     localStorage.setItem('searchHistory', JSON.stringify(storedSearches));
+    loadSearchHistory();
 }
 
 // load search history from localStorage
-// function loadSearchHistory() {
-//     const searchHistoryDiv = document.querySelector('#search-history');
-//     let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
-//     searchHistoryDiv.innerHTML = '';
-//     searchHistory.forEach(search => {
-//         const historyBtn = document.createElement('button');
-//         historyBtn.textContent = search;
-//         historyBtn.setAttribute('class', 'search-history');
-//         searchHistoryDiv.append(historyBtn);
-//         historyBtn.addEventListener('click', function() {
-//             cityInputEl.value = search;
-//             convertCityNameToCoords(search);
-//         })
-//     })
-// }
-
-
-// geocoding API - converting zip code to coordinates
-// `http://api.openweathermap.org/geo/1.0/zip?zip=E14,GB&appid=${APIkey}`
-
+function loadSearchHistory() {
+    const searchHistoryDiv = document.querySelector('#search-history');
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory'));
+    searchHistoryDiv.innerHTML = '';
+    searchHistory.forEach(search => {
+        const historyBtn = document.createElement('button');
+        historyBtn.textContent = search;
+        historyBtn.setAttribute('class', 'search-history');
+        searchHistoryDiv.append(historyBtn);
+        historyBtn.addEventListener('click', function () {
+            cityInputEl.value = search;
+            convertCityNameToCoords(search);
+        })
+    })
+}
 
 // covert the city name into lat/lon coordinates
 function convertCityNameToCoords(city) {
@@ -74,12 +70,12 @@ function convertCityNameToCoords(city) {
             fiveDayHeader.innerHTML = '';
             errorMessageDiv.innerHTML = '';
         })
+        // display an error message when the user inputs and invalid name
         .catch(function (error) {
             errorMessageDiv.innerHTML = '';
             errorMessageDiv.setAttribute('class', 'error-message');
             errorMessageDiv.textContent = 'Please enter a valid city name.';
             searchFormEl.append(errorMessageDiv);
-            // alert('Please enter a valid city name.')
             console.log(error);
         })
 };
@@ -96,19 +92,14 @@ function getWeatherData(cityURL) {
             return response.json();
         })
         .then(function (data) {
-            // console.log(data);
-            // console.log(data.city.name);
-            // console.log(data.list[0])
-            // console.log(`Temp: ${data.list[0].main.temp}`);
-            // console.log(`Wind: ${data.list[0].wind.speed}`);
-            // console.log(`Humidity: ${data.list[0].main.humidity}%`);
+            console.log(data);
             createWeatherCard(data);
             saveSearchHistory(data.city.name);
         })
 
 }
 
-// create a card with the day's weather information for each day
+// create a card with the day's weather information for each day and print it to the page
 function createWeatherCard(cityForecast) {
     fiveDayHeader.textContent = '5-Day Forecast:'
 
@@ -132,6 +123,7 @@ function createWeatherCard(cityForecast) {
         cardWind.textContent = `Wind: ${wind}`;
         cardHumidity.textContent = `Humidity: ${humidity}%`;
         card.append(cardDate, weatherIconImg, cardTemp, cardWind, cardHumidity);
+        // print the cards to the page based on if it is today or not
         if (i === 0) {
             cardDate.textContent = `${cityName} (${date})`;
             todayWeather.append(card);
@@ -145,20 +137,19 @@ function createWeatherCard(cityForecast) {
             console.log(`Humidity: ${humidity}%`)
             weeklyForecast.append(card);
         }
-
-        // console.log(`Date: ${date}`);
-        // console.log(`Temp: ${dailyCityForecast.main.temp}`);
-        // console.log(`Wind: ${dailyCityForecast.wind.speed}`);
-        // console.log(`Humidity: ${dailyCityForecast.main.humidity}%`);
         cityInputEl.value = '';
     }
 }
 
+// take the input from the form and run it as an argument in the convertCityNameToCoords function
 function handleFormSubmit(event) {
     event.preventDefault();
     let city = cityInputEl.value.trim();
     convertCityNameToCoords(city);
 };
 
-
+// run handleFormSubmit when the form is submitted
 searchFormEl.addEventListener('submit', handleFormSubmit);
+
+// load search history on page load
+window.onload(loadSearchHistory());
